@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter Demo | Powered by css-currency-converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="background-decorations">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+      <header class="app-header">
+        <div class="badge-wrapper">
+          <a
+            href="https://www.npmjs.com/package/css-currency-converter"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="badge npm-badge"
+          >
+            <span class="npm-tag">npm</span> css-currency-converter v1.0.1
+          </a>
+          <span class="badge live-badge">● Live Demo Project</span>
+        </div>
+        <h1 class="title">Currency Converter</h1>
+        <p class="subtitle">
+          Real-time exchange rate calculation powered by the
+          <a
+            href="https://www.npmjs.com/package/css-currency-converter"
+            target="_blank"
+            class="inline-link"
+            ><code>css-currency-converter</code></a
+          >
+          npm package.
+        </p>
+      </header>
+
+      <div class="converter-card">
+        <form id="converter-form">
+          <div class="input-group">
+            <label for="amount-input">Enter Amount</label>
+            <div class="amount-field-wrapper">
+              <span class="currency-symbol-tag" id="base-symbol">$</span>
+              <input
+                type="number"
+                id="amount-input"
+                value="100"
+                min="0.01"
+                step="any"
+                placeholder="100.00"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="currency-selectors-grid">
+            <div class="select-group">
+              <label for="from-currency">From</label>
+              <div class="custom-select-wrapper">
+                <select id="from-currency">
+                  <option value="USD" selected>🇺🇸 USD - US Dollar</option>
+                  <option value="EUR">🇪🇺 EUR - Euro</option>
+                  <option value="INR">🇮🇳 INR - Indian Rupee</option>
+                  <option value="GBP">🇬🇧 GBP - British Pound</option>
+                  <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                  <option value="SGD">🇸🇬 SGD - Singapore Dollar</option>
+                  <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              id="swap-btn"
+              class="swap-button"
+              title="Swap Currencies"
+              aria-label="Swap Currencies"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16" />
+              </svg>
+            </button>
+
+            <div class="select-group">
+              <label for="to-currency">To</label>
+              <div class="custom-select-wrapper">
+                <select id="to-currency">
+                  <option value="USD">🇺🇸 USD - US Dollar</option>
+                  <option value="EUR">🇪🇺 EUR - Euro</option>
+                  <option value="INR" selected>🇮🇳 INR - Indian Rupee</option>
+                  <option value="GBP">🇬🇧 GBP - British Pound</option>
+                  <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                  <option value="SGD">🇸🇬 SGD - Singapore Dollar</option>
+                  <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="convert-btn" class="convert-button">
+            <span class="btn-text">Convert Currency</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div id="result-box" class="result-box">
+          <div class="result-header">
+            <span class="result-label">Converted Amount</span>
+            <span class="exchange-rate-pill" id="rate-pill">1 USD = -- INR</span>
+          </div>
+          <div class="result-value" id="result-amount">--</div>
+          <div class="result-footer">
+            <span id="rate-updated">Calculated via css-currency-converter</span>
+          </div>
+        </div>
+
+        <div id="error-box" class="error-box" style="display: none"></div>
+      </div>
+
+      <!-- Quick presets -->
+      <section class="quick-presets">
+        <h3 class="presets-title">Popular Conversions (100 USD)</h3>
+        <div class="chips-container" id="quick-chips">
+          <button class="chip" data-from="USD" data-to="INR" data-amount="100">
+            🇺🇸 100 USD → 🇮🇳 INR
+          </button>
+          <button class="chip" data-from="USD" data-to="EUR" data-amount="100">
+            🇺🇸 100 USD → 🇪🇺 EUR
+          </button>
+          <button class="chip" data-from="USD" data-to="GBP" data-amount="100">
+            🇺🇸 100 USD → 🇬🇧 GBP
+          </button>
+          <button class="chip" data-from="EUR" data-to="INR" data-amount="100">
+            🇪🇺 100 EUR → 🇮🇳 INR
+          </button>
+        </div>
+      </section>
+
+      <!-- Code Showcase -->
+      <section class="code-section">
+        <div class="code-header">
+          <span>How this demo uses the package</span>
+          <span class="file-tag">main.js</span>
+        </div>
+        <pre><code><span class="kwd">import</span> { convertCurrency } <span class="kwd">from</span> <span class="str">"css-currency-converter"</span>;
+
+<span class="com">// Real-time conversion</span>
+<span class="kwd">const</span> convertedAmount = <span class="kwd">await</span> convertCurrency(
+  <span class="str">"USD"</span>,
+  <span class="str">"INR"</span>,
+  <span class="num">100</span>
+);
+console.log(convertedAmount);</code></pre>
+      </section>
+
+      <footer class="app-footer">
+        <p>
+          Author: <strong>Ritesh</strong> |
+          <a
+            href="https://github.com/itsriteshx/npm_Packages"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Package GitHub</a
+          >
+          •
+          <a
+            href="https://www.npmjs.com/package/css-currency-converter"
+            target="_blank"
+            rel="noopener noreferrer"
+            >NPM Registry</a
+          >
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
