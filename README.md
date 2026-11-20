@@ -9,7 +9,7 @@
 
 ## 🔗 Project Links
 
-- **Live Deployed App:** *(Live Demo URL)*
+- **Live Deployed App:** [https://itsriteshx.github.io/currency-converter-demo/](https://itsriteshx.github.io/currency-converter-demo/)
 - **NPM Package:** [css-currency-converter on npm](https://www.npmjs.com/package/css-currency-converter)
 - **NPM Package Repository:** [https://github.com/itsriteshx/npm_Packages](https://github.com/itsriteshx/npm_Packages)
 
